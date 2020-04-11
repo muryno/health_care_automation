@@ -1,0 +1,46 @@
+
+#[s3]
+bucketName : "outdoorkingmedia"
+accessKey: "AKIAI77BFSTSWSWNYTIA"
+accessSecret : "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"
+region: "eu-west-2"
+
+email_region: "eu-west-2"
+
+#[pay stack]
+pay_stack_key : "Bearer sk_test_22db71e32142f0c0d0577e368c9ba6d78379fbef"
+
+
+#[fcm]
+fcm_server_key : "AAAAxQK_ToI:APA91bEPr5l9cHI2aVfiw0ENEasXhg0DS6SCHlBNPGgYv6QX-AiWqHQjkbwMFOaeyrZE52Rx_1czWpYjkZM7eQuyIc-nPYLi4LDcAQHL-6JiWuwYfLdbT1jRnYjrRP80z6c2Skn1mez-"
+
+##[db]
+#local host
+#db_name : "odm"
+#db_pass : "stylemuryne"
+#db_user : "postgres"
+#db_type : "postgres"
+#ssl : "disable"
+#db_host : "localhost"
+#KEY : "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"
+#db_port : "5000"
+#token_password : "@5k_4_p@ss"
+
+
+
+#
+##live
+db_name : "lifetrusty_db"
+
+db_pass : "!lifetrusty-server"
+db_user : "lifetrusty"
+db_type : "postgres"
+ssl : "require"
+db_host : "lifetrusty-db.crfwoa4y7jzi.eu-west-2.rds.amazonaws.com"
+
+KEY : "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"
+db_port : "5000"
+token_password : "@5k_4_p@ss"
+
+
+
