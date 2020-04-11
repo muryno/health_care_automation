@@ -1,11 +1,9 @@
 package utils
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/spf13/viper"
-	"html/template"
 	"io/ioutil"
 	//go get -u github.com/aws/aws-sdk-go
 	"github.com/aws/aws-sdk-go/aws"
@@ -21,7 +19,7 @@ const (
 
 	// Replace recipient@example.com with a "To" address. If your account
 	// is still in the sandbox, this address must be verified.
-	Recipient = "murainoy@yahoo.com"
+	Recipient = "ybmuraino100@gmail.com"
 
 	// Specify a configuration set. To use a configuration
 	// set, comment the next line and line 92.
@@ -172,23 +170,16 @@ func Send() {
 	//)
 
 	//// Create an SES session.
-	//tplTxt,err := ioutil.ReadFile("temp.html")
-	//if err != nil {
-	//	fmt.Print(err)
-	//}
+	b, err := ioutil.ReadFile("temp.html") // just pass the file name
+	if err != nil {
+		fmt.Print(err)
+	}
 
+//	fmt.Println(b) // print the content as 'bytes'
 
-	t, err := template.ParseFiles("temp.html")
-	data := map[string]interface{}{"Name":"Jon Snow"}
+	str := string(b) // convert content to a 'string'
 
-
-
-
-	var tpl bytes.Buffer
-     t.Execute(&tpl, data)
-
-	resul := tpl.String()
-
+	//fmt.Println(str)
 
 
 
@@ -213,7 +204,7 @@ func Send() {
 			Body: &ses.Body{
 				Html: &ses.Content{
 					Charset: aws.String(CharSet),
-					Data:    aws.String(resul),
+					Data:    aws.String(str),
 				},
 
 			},
