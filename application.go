@@ -10,7 +10,7 @@ import (
 	"lifetrusty-brain/config"
 	"lifetrusty-brain/controller"
 	"lifetrusty-brain/model"
-	"lifetrusty-brain/utils"
+
 	"log"
 	"net/http"
 	"time"
@@ -73,7 +73,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Println(time.Now().Format(time.RFC850))
 
 
-	utils.Send()
+	//utils.Send()
 
 
 }

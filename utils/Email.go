@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/spf13/viper"
+	"html/template"
 	"io/ioutil"
+	"os"
+
 	//go get -u github.com/aws/aws-sdk-go
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
@@ -19,14 +22,14 @@ const (
 
 	// Replace recipient@example.com with a "To" address. If your account
 	// is still in the sandbox, this address must be verified.
-	Recipient = "ybmuraino100@gmail.com"
+	Recipient = "enquiry@lifetrusty.com"
 
 	// Specify a configuration set. To use a configuration
 	// set, comment the next line and line 92.
 	//ConfigurationSet = "ConfigSet"
 
 	// The subject line for the email.
-	Subject = "lifetrusty"
+	Subject = "LifeTrusty"
 
 	// The HTML body for the email.
 
@@ -38,35 +41,18 @@ const (
 )
 
 func SendEmail(em,fm,ln,ph,cnt string) {
-	// Create a new session in the us-west-2 region.
-	// Replace us-west-2 with the AWS Region you're using for Amazon SES.
+	//Create a new session in the us-west-2 region.
+	//Replace us-west-2 with the AWS Region you're using for Amazon SES.
 	//
 	//
-	// := "<!DOCTYPE html>" +
-	//		"<html lang='en'>" +
-	//		"<head>" +
-	//		"<meta charset='UTF-8'>" +
-	//		"<title>LifeTrusty</title>" +
-	//		"</head>" +
-	//		"<body>" +
-	//		"<style type='text/css' media='all'>" +
-	//		"	span {" +
-	//		"	font-weight: bold;" +
-	//		"	padding-bottom: 4px;" +
-	//		"	}" +
-	//		"div{" +
-	//
-	//		"	padding-bottom: 15px;" +
-	//		"}" +
-	//		"	</style>" +
-	//		"	<header style='font-weight: bolder; margin: 30px; font-size: x-large; color: darkgreen'>lifetrusty Client Enquiry</header>" +
-	//		"	<div> <span> Email :   </span> "+em +" </div>" +
-	//		"	<div> <span> First Name :   </span> "+fm +"</div>" +
-	//		"	<div> <span> Last Name :   </span> "+ln +"</div>" +
-	//		"	<div> <span> Phone number :   </span> "+ph +"</div>" +
-	//		"	<div> <span> Complains :   </span> "+cnt +"</div>" +
-	//		"	</body>" +
-	//		"	</html>"
+
+
+
+	str :=  "<span>Email :  </span><strong>"+em +" </strong> <br/>" +
+		"<span>First Name :   </span><strong>"+ fm +" </strong> <br/>" +
+		"<span>Last Name  :   </span><strong>"+ ln +" </strong> <br/>" +
+		"<span>Last Name  :   </span><strong>"+ ph +" </strong> <br/>" +
+		"<span>Complains  :  </span><strong>"+ cnt +" </strong> <br/>"
 
 
 	InitializeViper()
@@ -79,16 +65,6 @@ func SendEmail(em,fm,ln,ph,cnt string) {
 	//)
 
 	// Create an SES session.
-
-
-	b, err := ioutil.ReadFile("temp.html") // just pass the file name
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	fmt.Println(b) // print the content as 'bytes'
-
-	str := string(b)
 
 
 	awsSession := session.New(&aws.Config{
@@ -157,7 +133,13 @@ func SendEmail(em,fm,ln,ph,cnt string) {
 	fmt.Println(result)
 }
 
-func Send() {
+type Person struct {
+	Name   string
+	Age    int
+
+}
+
+func Send(email string) {
 
 
 	InitializeViper()
@@ -177,9 +159,18 @@ func Send() {
 
 //	fmt.Println(b) // print the content as 'bytes'
 
-	str := string(b) // convert content to a 'string'
+	person := Person{
+		Name:   "jan",
+		Age:    50,
+	}
+	str := string(b)
+	t := template.New("Person template")
+	t, err = t.Parse(str)
+	checkError(err)
 
-	//fmt.Println(str)
+	err = t.Execute(os.Stdout, person)
+	checkError(err)
+
 
 
 
@@ -197,7 +188,7 @@ func Send() {
 			CcAddresses: []*string{
 			},
 			ToAddresses: []*string{
-				aws.String(Recipient),
+				aws.String(email),
 			},
 		},
 		Message: &ses.Message{
@@ -243,8 +234,15 @@ func Send() {
 		return
 	}
 
-	fmt.Println("Email Sent to address: " + Recipient)
+	fmt.Println("Email Sent to address: " + email)
 
 
 	fmt.Println(result)
+}
+
+func checkError(err error) {
+	if err != nil {
+		fmt.Println("Fatal error ", err.Error())
+		os.Exit(1)
+	}
 }
