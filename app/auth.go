@@ -16,7 +16,7 @@ func NewMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{ "/","/patient/enquiry"} //List of endpoints that doesn't require auth
+		notAuth := []string{ "/client/enquiry"} //List of endpoints that doesn't require auth
 
 		if r.Header.Get("Access-Control-Request-Method") != "" {
 			// Set CORS headers

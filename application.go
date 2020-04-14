@@ -1,28 +1,27 @@
 package main
 
 import (
-
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
 	"lifetrusty-brain/app"
-	"lifetrusty-brain/config"
 	"lifetrusty-brain/controller"
-	"lifetrusty-brain/model"
-
 	"log"
 	"net/http"
 	"time"
+
+
 )
 
 func main(){
 
 
 
-	config.GetDB().Debug().AutoMigrate(&model.Enquiry{})
-	//config.GetDB().Debug().Model(model.Wallet{}).AddForeignKey("user_id","user(id)","CASCADE","CASCADE")
-	//config.GetDB().Debug().Model(model.Subscription{}).AddForeignKey("user_id","User(id)","CASCADE","CASCADE")
+
+	//configs.GetDB().Debug().AutoMigrate(&model.Enquiry{})
+	//configs.GetDB().Debug().Model(model.Wallet{}).AddForeignKey("user_id","user(id)","CASCADE","CASCADE")
+	//configs.GetDB().Debug().Model(model.Subscription{}).AddForeignKey("user_id","User(id)","CASCADE","CASCADE")
 	////
 
 	router := httprouter.New()
@@ -36,7 +35,7 @@ func main(){
 
 	router.GET("/",Index)
 	//general
-	router.POST("/patient/enquiry",controller.GetClientEnquiry)
+	router.POST("/client/enquiry",controller.GetClientEnquiry)
 
 	//
 	rout := app.NewMiddleware(router)

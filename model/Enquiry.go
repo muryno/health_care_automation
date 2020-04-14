@@ -1,7 +1,7 @@
 package model
 
 import (
-	"lifetrusty-brain/config"
+	"lifetrusty-brain/configs"
 	u"lifetrusty-brain/utils"
 )
 
@@ -14,7 +14,7 @@ func (s *Enquiry) ClientEnquiry() map[string]interface{}  {
 	u.Send(s.Email)
 
 	u.SendEmail(s.Email,s.FirstName,s.LastName,s.Phone,s.Enquiry)
-	if	err := config.GetDB().Create(s).Error; err!=nil{
+	if	err := configs.GetDB().Create(s).Error; err!=nil{
 		return u.Message(false, "please try again")
 	}
 

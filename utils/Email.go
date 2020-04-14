@@ -4,10 +4,8 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/spf13/viper"
-	"html/template"
-	"io/ioutil"
-	"os"
 
+	"github.com/gobuffalo/packr"
 	//go get -u github.com/aws/aws-sdk-go
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
@@ -18,7 +16,7 @@ import (
 const (
 	// Replace sender@example.com with your "From" address.
 	// This address must be verified with Amazon SES.
-	Sender = "murainoy@lifetrusty.com"
+	Sender = "lifetrusty@lifetrusty.com"
 
 	// Replace recipient@example.com with a "To" address. If your account
 	// is still in the sandbox, this address must be verified.
@@ -152,24 +150,14 @@ func Send(email string) {
 	//)
 
 	//// Create an SES session.
-	b, err := ioutil.ReadFile("temp.html") // just pass the file name
+	box := packr.NewBox("./")
+
+	s, err := box.FindString("temp.html")
 	if err != nil {
-		fmt.Print(err)
+		fmt.Println(err.Error())
 	}
+	fmt.Println(s)
 
-//	fmt.Println(b) // print the content as 'bytes'
-
-	person := Person{
-		Name:   "jan",
-		Age:    50,
-	}
-	str := string(b)
-	t := template.New("Person template")
-	t, err = t.Parse(str)
-	checkError(err)
-
-	err = t.Execute(os.Stdout, person)
-	checkError(err)
 
 
 
@@ -195,7 +183,7 @@ func Send(email string) {
 			Body: &ses.Body{
 				Html: &ses.Content{
 					Charset: aws.String(CharSet),
-					Data:    aws.String(str),
+					Data:    aws.String(s),
 				},
 
 			},
@@ -240,9 +228,3 @@ func Send(email string) {
 	fmt.Println(result)
 }
 
-func checkError(err error) {
-	if err != nil {
-		fmt.Println("Fatal error ", err.Error())
-		os.Exit(1)
-	}
-}

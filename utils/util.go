@@ -39,7 +39,7 @@ func InitializeViper()  {
 	viper.SetConfigType("yml")
 
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
+		fmt.Printf("Error reading configs file, %s", err)
 	}
 }
 
