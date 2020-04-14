@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/spf13/viper"
+	"io/ioutil"
 
-	"github.com/gobuffalo/packr"
 	//go get -u github.com/aws/aws-sdk-go
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
@@ -149,13 +149,12 @@ func Send(email string) {
 	//	Region:aws.String(region)},
 	//)
 
-	//// Create an SES session.
-	box := packr.NewBox("./")
-
-	s, err := box.FindString("temp.html")
+	str, err := ioutil.ReadFile("temp.html") // just pass the file name
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Print(err)
 	}
+
+	s:= string(str)
 	fmt.Println(s)
 
 
