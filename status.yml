@@ -1,0 +1,40 @@
+#[user]
+ Status:
+    0: "user not verify"
+    1: "user verified"
+    2: "user suspended"
+
+  Role:
+     1: "patient"
+     2: "hospital"
+     3: "doctor"
+     4: "admin"
+     5: "super admin"
+
+
+#[Doctor]
+     CommunicationType:
+       1: "chat only"
+       2: "Audio only"
+       3: "Video only"
+       4: "chat and Audio"
+       5: "video and Audio"
+       6: "chat and video"
+       7: "chat video Audio"
+
+#[DoctorAvailability]
+     DayId:
+       mon: 1
+       tues: 2
+       weds: 3
+       thurs: 4
+       fri: 5
+       sat: 6
+       sun: 7
+
+#[HealthPostResponds]
+    UserReaction:
+        nothing: 0
+        like: 1
+        surprise: 2
+        dislike: 3

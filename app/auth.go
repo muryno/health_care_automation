@@ -26,7 +26,7 @@ func NewMiddleware(next http.Handler) http.Handler {
 		}
 
 
-		// Adjust status code to 204
+		// Adjust status.yml code to 204
 	//	w.WriteHeader(http.StatusNoContent)
 		requestPath := r.URL.Path                                    //current request path
 		for _, value := range notAuth {

@@ -1,9 +1,53 @@
 package model
 
 import (
-	u"lifetrusty-brain/utils"
+	"github.com/jinzhu/gorm"
+	"lifetrusty-brain/configs"
+	u "lifetrusty-brain/utils"
 	"strings"
 )
+
+func (s *User) ValidateGeneralReg() (map[string]interface{}, bool) {
+
+	if s.FirstName == "" {
+		return u.Message(false, "First name is required"), false
+	}
+	if s.LastName == "" {
+		return u.Message(false, "Last name is required"), false
+	}
+
+	if s.Phone == "" {
+		return u.Message(false, "Phone number is required"), false
+	}
+
+
+	if !strings.Contains(s.Email, "@") {
+		return u.Message(false, "Email address is required"),false
+	}
+
+	if len(s.Password) < 6 {
+		return u.Message(false, "password cannot be less than 6 character!"),false
+	}
+
+
+
+	th :=&User{}
+
+	err := configs.GetDB().Model(User{}).Where("email=?", s.Email).Find(th).Error
+
+	if   err != nil && err != gorm.ErrRecordNotFound {
+		return u.Message(false, err.Error()), false
+	}
+	if th.Email == s.Email{
+		email := s.Email
+		return u.Message(false, "User with  " + email +"  already exist"), false
+
+	}
+
+	return u.Message(false, "Requirement passed"), true
+
+}
+
 
 func (s *Enquiry) ValidateEnquiry() (map[string]interface{}, bool) {
 
@@ -33,3 +77,78 @@ func (s *Enquiry) ValidateEnquiry() (map[string]interface{}, bool) {
 
 }
 
+func ValidatePatientAlone (UserId int) (map[string]interface{}, bool) {
+	s:= User{}
+
+	if err := configs.GetDB().Model(User{}).Where("id=?",UserId).First(&s).Error; err != nil{
+		return u.Message(false, err.Error()), false
+	}
+
+	if  s.Role  != 1{
+		return u.Message(false, "You are not authorize for this... "), false
+	}
+
+	//check if user has been suspended
+	if s.Status > 1 {
+		return u.Message(false, "Sorry.. your have been suspended..Kindly contact the admin"),false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+}
+
+func ValidateDoctorAlone (UserId int) (map[string]interface{}, bool) {
+	s:= User{}
+
+	if err := configs.GetDB().Model(User{}).Where("id=?",UserId).First(&s).Error; err != nil{
+		return u.Message(false, err.Error()), false
+	}
+
+	if  s.Role  != 3{
+		return u.Message(false, "You are not authorize for this... "), false
+	}
+
+	//check if user has been suspended
+	if s.Status > 1 {
+		return u.Message(false, "Sorry.. your have been suspended..Kindly contact the admin"),false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+}
+
+func ValidateAdminAlone (UserId int) (map[string]interface{}, bool) {
+	s:= User{}
+
+	if err := configs.GetDB().Model(User{}).Where("id=?",UserId).First(&s).Error; err != nil{
+		return u.Message(false, err.Error()), false
+	}
+
+	if  s.Role  != 4{
+		return u.Message(false, "You are not authorize for this... "), false
+	}
+
+	//check if user has been suspended
+	if s.Status > 1 {
+		return u.Message(false, "Sorry.. your have been suspended..Kindly contact the admin"),false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+}
+
+func ValidateSuperAdminAlone (UserId int) (map[string]interface{}, bool) {
+	s:= User{}
+
+	if err := configs.GetDB().Model(User{}).Where("id=?",UserId).First(&s).Error; err != nil{
+		return u.Message(false, err.Error()), false
+	}
+
+	if  s.Role  != 5{
+		return u.Message(false, "You are not authorize for this... "), false
+	}
+
+	//check if user has been suspended
+	if s.Status > 1 {
+		return u.Message(false, "Sorry.. your have been suspended..Kindly contact the admin"),false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+}

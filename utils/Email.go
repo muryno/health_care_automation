@@ -227,3 +227,92 @@ func Send(email string) {
 	fmt.Println(result)
 }
 
+func SendOtpEmail(email,HtmlBody string) {
+	// Create a new session in the us-west-2 region.
+	// Replace us-west-2 with the AWS Region you're using for Amazon SES.
+
+	//
+	//HtmlBody := "<H1 >hanks for signing up for Outdoorking  Media! We're excited to have you as an early user.</H1><br/><span> " +
+	//	" Kindly enter the pass code below to finish your registration<br/>" +
+	//	"<br/><br/> <strong>"+
+	//	" <strong/><br/>"+
+	//	"If you have any issues with the otp kindly revert to this mail"+
+	//	"<span/>"
+
+	InitializeViper()
+	region  := viper.GetString("email_region")
+
+	accessKey  := viper.GetString("accessKey")
+	accessSecret  := viper.GetString("accessSecret")
+	//sess, err := session.NewSession(&aws.Config{
+	//	Region:aws.String(region)},
+	//)
+
+	// Create an SES session.
+
+
+	awsSession := session.New(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewStaticCredentials(accessKey, accessSecret ,""),
+	})
+
+	svc := ses.New(awsSession)
+
+
+	// Assemble the email.
+	input := &ses.SendEmailInput{
+		Destination: &ses.Destination{
+			CcAddresses: []*string{
+			},
+			ToAddresses: []*string{
+				aws.String(email),
+			},
+		},
+		Message: &ses.Message{
+			Body: &ses.Body{
+				Html: &ses.Content{
+					Charset: aws.String(CharSet),
+					Data:    aws.String(HtmlBody),
+				},
+
+			},
+			Subject: &ses.Content{
+				Charset: aws.String(CharSet),
+				Data:    aws.String(Subject),
+			},
+		},
+		Source: aws.String(Sender),
+		// Uncomment to use a configuration set
+		//ConfigurationSetName: aws.String(ConfigurationSet),
+	}
+
+	// Attempt to send the email.
+	result, err := svc.SendEmail(input)
+
+	// Display error messages if they occur.
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case ses.ErrCodeMessageRejected:
+				fmt.Println(ses.ErrCodeMessageRejected, aerr.Error())
+			case ses.ErrCodeMailFromDomainNotVerifiedException:
+				fmt.Println(ses.ErrCodeMailFromDomainNotVerifiedException, aerr.Error())
+			case ses.ErrCodeConfigurationSetDoesNotExistException:
+				fmt.Println(ses.ErrCodeConfigurationSetDoesNotExistException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+
+		return
+	}
+
+	fmt.Println("Email Sent to address: " + email)
+
+
+	fmt.Println(result)
+}

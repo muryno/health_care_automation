@@ -3,7 +3,9 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
+	"lifetrusty-brain/model"
 	"net/http"
 )
 
@@ -12,7 +14,7 @@ var UserId = 0
 
 func Message(status bool, message string) map[string]interface{} {
 
-	return map[string]interface{}{"status": status, "message": message}
+	return map[string]interface{}{"status.yml": status, "message": message}
 
 }
 
@@ -44,6 +46,12 @@ func InitializeViper()  {
 }
 
 
+func GenerateAuthToken(id uint) string {
+	tk := &model.Token{UserId: id,}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(viper.GetString("token_password")))
+	return "Bearer" + tokenString
+}
 
 
 
