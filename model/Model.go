@@ -10,6 +10,13 @@ type Token struct {
 	jwt.StandardClaims
 }
 
+
+type Logs struct {
+	UserId          uint   `json:"user_id"`
+	Activity    string `json:"activities"`
+	Date       string
+}
+
 type Enquiry struct {
 
 	ID           uint    `gorm:"primary_key"`
@@ -33,12 +40,11 @@ type User struct {
 	Phone        string `json:"phone"`
 	Password     string `json:"password"`
 	Age    		 string `json:"age"`
-	Sex    		 string `json:"sex"`
+	Gender    		 string `json:"gender"`
 	Nationality    		 string `json:"nationality"`
 	State    		 string `json:"state"`
 	Address  		 string `json:"address"`
 	Image		 string `json:"image"`
-
 	Token        string      `json:"appKey";sql:"-"`
 	Otp          string  `json:"otp"`
 

@@ -4,11 +4,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"lifetrusty-brain/model"
 	u "lifetrusty-brain/utils"
-	"log"
 	"net/http"
 )
 
-func CreatePatientAccount(w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
+func CreateSuperAdmin (w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
 
 
 	_ = req.ParseForm()
@@ -26,25 +25,11 @@ func CreatePatientAccount(w http.ResponseWriter, req *http.Request,_ httprouter.
 	user.FirstName  = fname
 	user.LastName = lname
 	user.Phone  = phone
-	user.Role = 1 //patient id
 
 
 
 
-	resp := user.RegisterPatient()
+	resp := user.RegisterSuperAdmin()
 	u.Responds(w, resp)
 }
-
-func VerifyPatient(w http.ResponseWriter, req *http.Request,_ httprouter.Params)  {
-	_ = req.ParseForm()
-	otp_code :=	req.Form.Get("otp_code")
-
-	log.Println(otp_code)
-
-	resp := model.VerifyOtp(otp_code)
-	u.Responds(w, resp)
-}
-
-
-
 

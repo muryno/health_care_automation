@@ -7,7 +7,7 @@ import (
 	u "lifetrusty-brain/utils"
 )
 
-func (s *User) CreatePatient() map[string]interface{} {
+func (s *User) RegisterPatient() map[string]interface{} {
 
 
 
@@ -59,7 +59,7 @@ func (s *User) CreatePatient() map[string]interface{} {
 	resp.Email = s.Email
 	resp.Token = u.GenerateAuthToken(s.ID)
 
-	response := u.Message(true, "Account has been created.. Kindly check your email")
+	response := u.Message(true, "Kindly verify your account with the OTP sent to your mail check your email")
 	response["data"] = resp
 
 	tx.Commit()
@@ -119,6 +119,19 @@ func VerifyOtp(otp string) map[string]interface{}  {
 
 
 
+	s.Token = u.GenerateAuthToken(s.ID)
 
+	s.Password = ""
+	s.Otp = ""
+	response := u.Message(true, "Successful")
+	response["data"] = s
+
+	tx.Commit()
 	return response
 }
+
+
+
+
+
+
