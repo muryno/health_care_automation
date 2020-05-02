@@ -40,6 +40,11 @@ func init() {
 	//
 	//configs.GetDB().Debug().AutoMigrate(&model.Student{}, &model.Faculty{},&model.Department{}, &model.Course{},model.RegisteredCourse{},model.DepartmentCourse{})
 
+
+	//db.Where("amount > ?", db.Table("orders").Select("AVG(amount)").Where("state = ?", "paid").SubQuery()).Find(&orders)
+	//// SELECT * FROM "orders"  WHERE "orders"."deleted_at" IS NULL AND (amount > (SELECT AVG(amount) FROM "orders"  WHERE (state = 'paid')));
+	//
+
 }
 func GetDB() *gorm.DB {
 	return db

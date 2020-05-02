@@ -1,5 +1,6 @@
 
 #[s3]
+bucketName : "outdoorkingmedia"
 accessKey: "AKIAI77BFSTSWSWNYTIA"
 accessSecret : "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"
 region: "eu-west-2"

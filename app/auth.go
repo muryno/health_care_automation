@@ -18,12 +18,12 @@ func NewMiddleware(next http.Handler) http.Handler {
 
 		notAuth := []string{ "/client/enquiry"} //List of endpoints that doesn't require auth
 
-		//if r.Header.Get("Access-Control-Request-Method") != "" {
-		//	// Set CORS headers
-		//	header := w.Header()
-		//	header.Set("Access-Control-Allow-Methods", r.Header.Get("Allow"))
-		//	header.Set("Access-Control-Allow-Origin", "*")
-		//}
+		if r.Header.Get("Access-Control-Request-Method") != "" {
+			// Set CORS headers
+			header := w.Header()
+			header.Set("Access-Control-Allow-Methods", r.Header.Get("Allow"))
+			header.Set("Access-Control-Allow-Origin", "*")
+		}
 
 
 		// Adjust status.yml code to 204

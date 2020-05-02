@@ -116,15 +116,16 @@ type CommunityComment struct{
 type HealthPost struct {
 	ID            uint    `gorm:"primary_key"`
 	UserId uint    `json:"user_id"`
-	Image      uint    `gorm:"image"`
-	Post      uint      `gorm:"post"`
-	CreatedAt time.Time
+	Image      string    `gorm:"image"`
+	Post      string      `gorm:"post"`
+	HealthPostRespondsID   uint
+	HealthPostResponds []HealthPostResponds
+	CreatedAt string
 	UpdatedAt time.Time
 }
 
 type HealthPostResponds struct {
-	ID            uint    `gorm:"primary_key"`
-	UniqueLike uint    `json:"unique_like"`    //ID+UserID    so can be unique
+	UniqueLike uint    `gorm:"primary_key"`    //ID+UserID    so can be unique
 	UserId uint    `json:"user_id"`
 	UserReaction    uint   `json:"user_reaction"`
 }

@@ -105,6 +105,18 @@ func (s *Doctor) ValidateDoctorSignUp() (map[string]interface{}, bool) {
 
 }
 
+func (s *HealthPost) ValidateHealthPost() (map[string]interface{}, bool) {
+
+	if s.Image == "" {
+		return u.Message(false, "Kindly upload image"), false
+	}
+	if s.Post == "" {
+		return u.Message(false, "post field is require"), false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+
+}
 
 
 func (s *User) ValidateProfileUpdate() (map[string]interface{}, bool) {

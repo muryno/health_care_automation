@@ -11,6 +11,7 @@ type RegistrationResponds struct {
 
 }
 
+
 type DoctorResponds struct {
 
 	ID            uint    `gorm:"primary_key"`
