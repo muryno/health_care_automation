@@ -56,7 +56,7 @@ func (s *User) RegisterSuperAdmin() map[string]interface{} {
 	}
 
 
-	s.Token = u.GenerateAuthToken(s.ID)
+	s.Token = GenerateAuthToken(s.ID)
 
 	s.Otp = ""
 	s.Password = ""

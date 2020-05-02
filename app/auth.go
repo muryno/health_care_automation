@@ -1,11 +1,10 @@
 package app
 
 import (
-
-	"context"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
+	"golang.org/x/net/context"
 	"lifetrusty-brain/model"
 	"lifetrusty-brain/utils"
 	"net/http"

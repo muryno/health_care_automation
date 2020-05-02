@@ -140,7 +140,7 @@ func (s *User)UpdateUserRecord() map[string]interface{}  {
 
 
 
-	s.Token = u.GenerateAuthToken(s.ID)
+	s.Token = GenerateAuthToken(s.ID)
 
 	s.Password = "" //delete password
 	s.Otp = ""

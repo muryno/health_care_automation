@@ -60,7 +60,7 @@ func (s *User) RegisterAdmin() map[string]interface{} {
 	u.SendOtpEmail(s.Email,u.EmailTemplate(password,s.FirstName))
 
 
-	s.Token = u.GenerateAuthToken(s.ID)
+	s.Token = GenerateAuthToken(s.ID)
 
 	s.Otp = ""
 	s.Password = ""

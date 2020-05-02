@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"github.com/dgrijalva/jwt-go"
+	"github.com/spf13/viper"
+	"time"
+)
 
 type RegistrationResponds struct {
 	ID           uint    `json:"id"`
@@ -39,4 +43,11 @@ type DoctorResponds struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 
+}
+
+func GenerateAuthToken(id uint) string {
+	tk := &Token{UserId: id,}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(viper.GetString("token_password")))
+	return "Bearer" + tokenString
 }

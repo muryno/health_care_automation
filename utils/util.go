@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	"github.com/dgrijalva/jwt-go"
 	"github.com/rebuy-de/aws-nuke/pkg/util"
 	"regexp"
 
@@ -19,7 +18,6 @@ import (
 	"net/http/httputil"
 	"strings"
 
-	"lifetrusty-brain/model"
 	"math/rand"
 	"mime/multipart"
 	"net/http"
@@ -64,12 +62,7 @@ func InitializeViper()  {
 }
 
 
-func GenerateAuthToken(id uint) string {
-	tk := &model.Token{UserId: id,}
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(viper.GetString("token_password")))
-	return "Bearer" + tokenString
-}
+
 
 func GenerateRandomPassword()string {
 	rand.Seed(time.Now().UnixNano())
