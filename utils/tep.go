@@ -39,7 +39,7 @@ func EmailTemplate(otp ,name string) string {
 		"}}@media only screen and (max-width: 500px) {.button {width: 100% !important;}}</style></head>" +
 		"<body><table class='email-wrapper' width='100%' cellpadding='0' cellspacing='0'><tr>" +
 		"<td align='center'><table class='email-content' width='100%' cellpadding='0' cellspacing='0'>" +
-		"<!-- Logo -->  <td class='email-masthead'><img src='https://lifetrusty.s3.eu-west-2.amazonaws.com/logo/thanks.jpg' height='150' width='200'></td>" +
+		"<!-- Logo -->  <td class='email-masthead'><img src='https://lifetrusty.s3.eu-west-2.amazonaws.com/logo/LifeTrust+LOGO+OPTIONS-01.jpg' height='150' width='200'></td>" +
 		"<!-- Email Body --><tr><td class='email-body' width='100%'>" +
 		"<table class='email-body_inner' align='center' width='570' cellpadding='0' cellspacing='0'><!-- Body content --><tr>" +
 		"<td class='content-cell'>   <h3>Your verification code is</h3><h1  class='email-masthead'style='color: #28DB67;font-size: xx-large;alignment: center" +

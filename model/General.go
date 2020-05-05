@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"lifetrusty-brain/configs"
 	u "lifetrusty-brain/utils"
+	"strings"
 	"time"
 )
 
@@ -190,6 +191,79 @@ func  ChangePassword(oldPassword,newPassword string) map[string]interface{} {
 
 
 	resp := u.Message(true, "Password changed successfully... ")
+	return resp
+}
+
+func  LoginAdmin(email,password string) map[string]interface{} {
+
+	var dt User
+
+	if !strings.Contains(email, "@") {
+		return u.Message(false, "Email address is required")
+	}
+
+	if password == "" {
+		return u.Message(false, "invalid Password!")
+	}
+
+
+
+	err:= configs.GetDB().Where("email=?",email).Find(&dt).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return u.Message(false, "User record not found!!")
+		}
+		return u.Message(false, err.Error())
+
+	}
+
+
+	err = bcrypt.CompareHashAndPassword([]byte(dt.Password), []byte(password))
+
+	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
+		return u.Message(false, "Invalid login credentials. Please try again")
+	}
+
+	if dt.ID<=0 {
+		return u.Message(false, "Invalid login credentials. Please try again")
+	}
+	dt.Token = GenerateAuthToken(dt.ID)
+
+	//Worked! Logged In
+	dt.Password = ""
+
+
+
+	if dt.Role == 1 && dt.Status == 0{
+		otp  := u.GetOtp()
+
+
+		//fetch user
+		if err = configs.GetDB().Model(&User{}).Where("email=?",dt.Email).Update("otp",otp).Error; err != nil{
+			return u.Message(false, "An error occur. Please retry")
+
+		}
+		u.SendOtpEmail(dt.Email,u.EmailTemplate(otp,dt.FirstName))
+
+
+
+
+
+
+		resp := &RegistrationResponds{}
+		resp.ID = dt.ID
+		resp.Email = dt.Email
+		resp.Token = GenerateAuthToken(dt.ID)
+
+		response := u.Message(true, "Account has been created")
+		response["data"] = resp
+
+		return response
+	}
+
+
+
+	resp := u.Message(true, "Logged In")
 	resp["data"] = dt
 	return resp
 }

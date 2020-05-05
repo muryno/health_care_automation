@@ -17,7 +17,7 @@ func CreateDoctor (w http.ResponseWriter, req *http.Request,_ httprouter.Params)
 	phone :=	req.Form.Get("phone")
 
 	licence :=	req.Form.Get("licence")
-	yearExperience :=	req.Form.Get("YearExperience")
+	yearExperience :=	req.Form.Get("year_experience")
 	 title :=	req.Form.Get("title")
 
 

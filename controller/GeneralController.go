@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func GetUserByIdController(w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
+func GetUserByTokenId(w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
 	_ = req.ParseForm()
 	resp := model.GetUserById()
 	u.Responds(w, resp)
@@ -35,6 +35,17 @@ func UpdateUserRecord(w http.ResponseWriter, req *http.Request,_ httprouter.Para
 	user.Address  = address
 
 	resp := user.UpdateUserRecord()
+	u.Responds(w, resp)
+}
+
+func LoginAccount(w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
+
+	_ = req.ParseForm()
+	email := req.Form.Get("email")
+	password := req.Form.Get("password")
+
+
+	resp := model.LoginAdmin(email,password)
 	u.Responds(w, resp)
 }
 

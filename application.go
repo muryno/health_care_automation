@@ -16,7 +16,7 @@ func main(){
 
 
 
-
+	//
 	//configs.GetDB().Debug().AutoMigrate(&model.User{},&model.Logs{},&model.Doctor{},&model.Enquiry{},&model.DoctorAvailability{},&model.Review{},&model.CallHistory{},
 	//	&model.Rate{},&model.CommunityTitle{},&model.CommunityComment{},&model.HealthPost{},&model.HealthPostResponds{},&model.Wallet{},&model.WalletTransaction{},&model.FavoriteDoctor{},
 	//	&model.Enquiry{})
@@ -37,7 +37,39 @@ func main(){
 	//general
 	router.POST("/client/enquiry",controller.GetClientEnquiry)
 
-	//
+	//super admin
+	//router.POST("/create/super/admin",controller.CreateSuperAdmin)
+	router.GET("/all/admin",controller.GetAllAdmin)
+
+	//doctor
+	router.POST("/create/doctor",controller.CreateDoctor)
+
+
+	//admin
+	router.POST("/create/admin",controller.CreateAdmin)
+	router.GET("/all/doctor",controller.GetAllDoctor)
+	router.GET("/all/patient",controller.GetAllPatient)
+
+
+
+	//general
+	router.GET("/user",controller.GetUserByTokenId)
+	router.PUT("/update/user",controller.UpdateUserRecord)
+	router.PUT("/change/user/password",controller.ChangePasswordController)
+	router.POST("/user/login",controller.LoginAccount)
+
+
+	//health post
+	router.POST("/upload/post",controller.UploadPost)
+	router.GET("/get/posts",controller.GetPost)
+	router.PUT("/delete/post",controller.DeleteMedia)
+
+	//patient
+	router.POST("/create/patient",controller.CreatePatientAccount)
+	router.PUT("/verify/otp",controller.VerifyPatient)
+
+
+
 	rout := app.NewMiddleware(router)
 	handler := cors.Default().Handler(rout)
 

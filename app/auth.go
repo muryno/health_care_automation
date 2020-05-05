@@ -15,7 +15,7 @@ func NewMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{ "/client/enquiry"} //List of endpoints that doesn't require auth
+		notAuth := []string{ "/client/enquiry","/create/patient","/get/posts","/user/login"} //List of endpoints that doesn't require auth
 
 		if r.Header.Get("Access-Control-Request-Method") != "" {
 			// Set CORS headers
@@ -25,7 +25,7 @@ func NewMiddleware(next http.Handler) http.Handler {
 		}
 
 
-		// Adjust status.yml code to 204
+		// Adjust status code to 204
 	//	w.WriteHeader(http.StatusNoContent)
 		requestPath := r.URL.Path                                    //current request path
 		for _, value := range notAuth {

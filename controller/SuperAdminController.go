@@ -33,3 +33,8 @@ func CreateSuperAdmin (w http.ResponseWriter, req *http.Request,_ httprouter.Par
 	u.Responds(w, resp)
 }
 
+func GetAllAdmin(w http.ResponseWriter, req *http.Request,_ httprouter.Params) {
+	_ = req.ParseForm()
+	resp := model.GetAllUser(Enum.Admin)
+	u.Responds(w, resp)
+}

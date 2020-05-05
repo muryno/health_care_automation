@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-func UploadImage (w http.ResponseWriter, r *http.Request,  re httprouter.Params) {
+func UploadPost (w http.ResponseWriter, r *http.Request,  re httprouter.Params) {
 
 
 

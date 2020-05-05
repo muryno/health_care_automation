@@ -227,7 +227,7 @@ func ValidateAdmin (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if  !(4>= s.Role && 5<= s.Role )  {
+	if  !(4== s.Role || 5== s.Role )  {
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 

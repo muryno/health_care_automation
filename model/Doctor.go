@@ -73,7 +73,7 @@ func  RegisterDoctor(s *User, d *Doctor) map[string]interface{} {
 
 	}
 
-	u.SendOtpEmail(s.Email,u.EmailTemplate(password,s.FirstName))
+	u.SendPasswordEmail(s.Email,u.PasswordTemplate(password,s.FirstName,s.Email))
 
 
 	s.Token = GenerateAuthToken(s.ID)

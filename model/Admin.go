@@ -57,7 +57,7 @@ func (s *User) RegisterAdmin() map[string]interface{} {
 		return u.Message(false, "Connection error. Please retry")
 
 	}
-	u.SendOtpEmail(s.Email,u.EmailTemplate(password,s.FirstName))
+	u.SendPasswordEmail(s.Email,u.PasswordTemplate(password,s.FirstName,s.Email))
 
 
 	s.Token = GenerateAuthToken(s.ID)
@@ -80,6 +80,11 @@ func GetAllUser(id int) map[string]interface{} {
 		return res
 	}
 
+	if id == 5 {
+		if res, ok := ValidateSuperAdminAlone(u.UserId); !ok {
+			return res
+		}
+	}
 	us := &[]User{}
 
 	if err := configs.GetDB().Where("role=?",id).Select([]string{"id","first_name", "last_name","role","status","email","phone","gender","nationality","state","age"}).Find(&us).Error; err != nil{

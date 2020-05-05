@@ -57,7 +57,7 @@ func (s *User) RegisterPatient() map[string]interface{} {
 	resp := &RegistrationResponds{}
 	resp.ID = s.ID
 	resp.Email = s.Email
-	resp.Token = u.GenerateAuthToken(s.ID)
+	resp.Token = GenerateAuthToken(s.ID)
 
 	response := u.Message(true, "Kindly verify your account with the OTP sent to your mail check your email")
 	response["data"] = resp
@@ -119,7 +119,7 @@ func VerifyOtp(otp string) map[string]interface{}  {
 
 
 
-	s.Token = u.GenerateAuthToken(s.ID)
+	s.Token = GenerateAuthToken(s.ID)
 
 	s.Password = ""
 	s.Otp = ""

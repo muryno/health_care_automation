@@ -1,6 +1,6 @@
 package utils
 
-func PasswordTemplate(otp ,name string) string {
+func PasswordTemplate(password ,name,email string) string {
 	return  "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> "+
 		"<html xmlns='http://www.w3.org/1999/xhtml'> " +
 		"<head>"+
@@ -17,7 +17,7 @@ func PasswordTemplate(otp ,name string) string {
 		"-webkit-text-size-adjust: none;}a {color: #414EF9;}"+
 
 		/* Layout ------------------------------ */
-		".email-wrapper {width: 100%;margin: 0;padding: 0;background-color: #F5F7F9;}.email-content {width: 100%;margin: 0;"+
+		".email-wrapper {width: 100%;margin: 0;padding: 0;background-color: #FFFFFF;}.email-content {width: 100%;margin: 0;"+
 		"padding: 0;}"+
 
 		/* Masthead ----------------------- */
@@ -39,11 +39,13 @@ func PasswordTemplate(otp ,name string) string {
 		"}}@media only screen and (max-width: 500px) {.button {width: 100% !important;}}</style></head>" +
 		"<body><table class='email-wrapper' width='100%' cellpadding='0' cellspacing='0'><tr>" +
 		"<td align='center'><table class='email-content' width='100%' cellpadding='0' cellspacing='0'>" +
-		"<!-- Logo -->  <td class='email-masthead'><img src='https://lifetrusty.s3.eu-west-2.amazonaws.com/logo/thanks.jpg' height='150' width='200'></td>" +
+		"<!-- Logo -->  <td class='email-masthead'><img src='https://lifetrusty.s3.eu-west-2.amazonaws.com/logo/LifeTrust+LOGO+OPTIONS-01.jpg' height='150' width='200'></td>" +
 		"<!-- Email Body --><tr><td class='email-body' width='100%'>" +
 		"<table class='email-body_inner' align='center' width='570' cellpadding='0' cellspacing='0'><!-- Body content --><tr>" +
-		"<td class='content-cell'>   <h3>Your Password is</h3><h1  class='email-masthead'style='color: #28DB67;font-size: xx-large;alignment: center" +
-			"'> "+ otp + "</h1><p>Dear " + name +" </p><p>We are glad to see you are getting started with LifeTrusty. Your login password is "+otp+" . Kindly login to your account to change your password.</p>" +
+		"<td class='content-cell'><h3 style='color: #000000;font-size: large;alignment: start" +
+		"'> Dear " + name +"</h3> <br/> <br/> <h3>Here is your login details</h3>" +
+			"<h1  class='email-masthead'style='color: #000000;font-size: large;alignment: start" +
+			"'> <p>Email : "+email+"</p><span/><p>Password : "+password+"</p></h1><p><p>We are glad to have you as our doctor on LifeTrusty . Kindly login to  https//lifetrusty.com   with the details above to change your password.</p>" +
 		"<!-- Action --><table class='body-action' align='center' width='100%' cellpadding='0' cellspacing='0'><tr><td align='center'>" +
 		"<div></div></td></tr></table><!-- Sub copy --><table class='body-sub'>" +
 		"<tr><td>Please ignore if you did not initiate this request.</td></tr>" +
