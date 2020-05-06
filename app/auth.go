@@ -15,14 +15,14 @@ func NewMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{ "/client/enquiry","/create/patient","/get/posts","/user/login"} //List of endpoints that doesn't require auth
+		notAuth := []string{ "/client/enquiry","/create/patient","/get/healthpost","/user/login"} //List of endpoints that doesn't require auth
 
-		if r.Header.Get("Access-Control-Request-Method") != "" {
-			// Set CORS headers
-			header := w.Header()
-			header.Set("Access-Control-Allow-Methods", r.Header.Get("Allow"))
-			header.Set("Access-Control-Allow-Origin", "*")
-		}
+		//if r.Header.Get("Access-Control-Request-Method") != "" {
+		//	// Set CORS headers
+		//	header := w.Header()
+		//	header.Set("Access-Control-Allow-Methods", r.Header.Get("Allow"))
+		//	header.Set("Access-Control-Allow-Origin", "*")
+		//}
 
 
 		// Adjust status code to 204

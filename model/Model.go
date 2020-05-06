@@ -45,7 +45,7 @@ type User struct {
 	State    		 string `json:"state"`
 	Address  		 string `json:"address"`
 	Image		 string `json:"image"`
-	Token        string      `json:"appKey";sql:"-"`
+	Token        string      `json:"authorization";sql:"-"`
 	Otp          string  `json:"otp"`
 
 

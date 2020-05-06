@@ -60,9 +60,9 @@ func main(){
 
 
 	//health post
-	router.POST("/upload/post",controller.UploadPost)
-	router.GET("/get/posts",controller.GetPost)
-	router.PUT("/delete/post",controller.DeleteMedia)
+	router.POST("/upload/healthpost",controller.UploadPost)
+	router.GET("/get/healthpost",controller.GetPost)
+	router.PUT("/delete/healthpost",controller.DeleteMedia)
 
 	//patient
 	router.POST("/create/patient",controller.CreatePatientAccount)
