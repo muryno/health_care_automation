@@ -36,8 +36,15 @@ func Message(status bool, message string) map[string]interface{} {
 
 func Responds(w http.ResponseWriter, data map[string]interface{}) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	_ = json.NewEncoder(w).Encode(data)
+	js, err := json.Marshal(data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(js)
+
+
 }
 
 

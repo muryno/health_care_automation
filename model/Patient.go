@@ -69,7 +69,7 @@ func (s *User) RegisterPatient() map[string]interface{} {
 
 func VerifyOtp(otp string) map[string]interface{}  {
 
-	userId := u.UserId
+	userId :=&u.UserId
 	if otp == "" {
 		return u.Message(false, "otp is required")
 	}
@@ -86,7 +86,7 @@ func VerifyOtp(otp string) map[string]interface{}  {
 	s := &User{}
 
 	//	if err = config.GetDB().Where("email=?",s.Email).First(&s).Error; err != nil{
-	err:= configs.GetDB().Where("id=?",userId).Find(&s).Error
+	err:= configs.GetDB().Where("id=?",*userId).Find(&s).Error
 	if err != nil && err == gorm.ErrRecordNotFound {
 		tx.Rollback()
 
@@ -104,14 +104,14 @@ func VerifyOtp(otp string) map[string]interface{}  {
 	}
 
 
-	if err := configs.GetDB().Model(&s).Where("id=?",userId).Updates(map[string]interface{}{"status": 1,"otp":"used"}).Error; err != nil {
+	if err := configs.GetDB().Model(&s).Where("id=?",*userId).Updates(map[string]interface{}{"status": 1,"otp":"used"}).Error; err != nil {
 		tx.Rollback()
 		return u.Message(false, "Error verifying user. Please retry")
 
 	}
 
 
-	if err := configs.GetDB().Where("id=?",userId).First(&s).Error; err != nil {
+	if err := configs.GetDB().Where("id=?",*userId).First(&s).Error; err != nil {
 		tx.Rollback()
 		return u.Message(false, "Error verifying user. Please retry")
 

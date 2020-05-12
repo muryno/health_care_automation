@@ -97,7 +97,8 @@ type Rate struct {
 type CommunityTitle struct{
 	ID       uint    `gorm:"primary_key"`
 	Title     string    `json:"post_title"`
-	UserId     uint    `json:"user_id"`
+	Image     string     `json:"health_image"`
+	UserId     uint    `json:"usr"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -105,11 +106,20 @@ type CommunityTitle struct{
 
 type CommunityComment struct{
 	ID       uint    `gorm:"primary_key"`
-	CommentId    uint    `json:"comment_id"`
+	CommunityTitle    uint    `json:"community_title"`
 	Comment     string    `json:"comment"`
 	UserId     uint    `json:"user_id"`
+	Likes  int     `json:"likes"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
+}
+
+type CommentLikes struct {
+	UniqueLike uint    `gorm:"primary_key"`    //Comment+UserID    so can be unique
+	CommunityCommentID uint  `json:"comment_id"`
+	UserId uint    `json:"user_id"`
+	UserReaction    uint   `json:"user_reaction"`
+	UpdatedAt string
 }
 
 
@@ -120,7 +130,7 @@ type HealthPost struct {
 	Post      string      `gorm:"post"`
 	HealthPostRespondsID   uint
 	HealthPostResponds []HealthPostResponds
-	CreatedAt string
+	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 

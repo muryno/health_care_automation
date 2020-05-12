@@ -6,15 +6,15 @@ import (
 	u "lifetrusty-brain/utils"
 	"log"
 	"mime/multipart"
-	"time"
 )
 
 
 func AddPost(fil multipart.File, fileHeader *multipart.FileHeader,  post string) map[string]interface{} {
 
 
+	usr:= &u.UserId
 
-	if res, ok := ValidateAdmin(u.UserId); !ok {
+	if res, ok := ValidateAdmin(*usr); !ok {
 		return res
 	}
 
@@ -51,7 +51,6 @@ func AddPost(fil multipart.File, fileHeader *multipart.FileHeader,  post string)
 
 	s.Post = post
 	s.Image = fileName
-	s.CreatedAt = time.Now().Format(time.RFC850)
 
 
 	if	err = configs.GetDB().Create(&s).Error; err!=nil{
@@ -70,14 +69,12 @@ func GetPost() map[string]interface{} {
 
 	us := &[]HealthPost{}
 
-	if err := configs.GetDB().Last(&us).Limit(5).Error; err != nil{
+	if err := configs.GetDB().Last(&us).Limit(25).Error; err != nil{
 		return u.Message(false, err.Error())
 	}
 
 
 
-	logss:= fmt.Sprintf("%s%s%s", "User ",string(u.UserId),  "Get all health post")
-	CreateLog(logss)
 
 	resp := u.Message(true, "Successfully ")
 	resp["data"] = &us
@@ -91,10 +88,10 @@ func DeletePost(post_id int)   map[string]interface{} {
 		return u.Message(false, "Missing post id")
 	}
 
+	usr:= &u.UserId
 
 
-
-	if res, ok := ValidateAdmin(u.UserId); !ok {
+	if res, ok := ValidateAdmin(*usr); !ok {
 		return res
 	}
 	//catgo := &Area{}

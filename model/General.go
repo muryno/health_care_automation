@@ -28,13 +28,15 @@ func CreateLog(happen string)  {
 func GetUserById() map[string]interface{} {
 
 
+	userid := u.UserId
+
 	catr :=User{}
-	if res, ok := ValidateWhoMakeRequest(u.UserId); !ok {
+	if res, ok := ValidateWhoMakeRequest(userid); !ok {
 		return res
 	}
 
 
-	if	err := configs.GetDB().Where("id=?",u.UserId).Last(&catr).Error; err!=nil{
+	if	err := configs.GetDB().Where("id=?",userid).Last(&catr).Error; err!=nil{
 
 
 		return u.Message(false, err.Error())
@@ -45,14 +47,14 @@ func GetUserById() map[string]interface{} {
 	catr.Password = ""
 	catr.Otp = ""
 
-	log := fmt.Sprintf("%s%s%s", "User ",string(u.UserId), "Get client by id")
+	log := fmt.Sprintf("%s%s%s", "User ",string(userid), "Get client by id")
 	CreateLog(log)
 
 	//check if it is doctor
 	if catr.Role == 3{
 		s :=Doctor{}
-		if	err := configs.GetDB().Where("doctor_id=?",u.UserId).Find(&s).Error; err!=nil{
-			return u.Message(false, "Error fetching Area. Please retry")
+		if	err := configs.GetDB().Where("doctor_id=?",userid).Find(&s).Error; err!=nil{
+			return u.Message(false, err.Error())
 		}
 
 

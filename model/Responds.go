@@ -45,6 +45,17 @@ type DoctorResponds struct {
 
 }
 
+type Comment struct{
+	ID       uint    `gorm:"primary_key"`
+	Title   uint    `json:"title_id"`
+	Comment     string    `json:"comment"`
+	CreatedAt string   `json:"created"`
+	Reaction int   `json:"reactions_no"`
+	Like  int  `json:"is_like"`
+}
+
+
+
 func GenerateAuthToken(id uint) string {
 	tk := &Token{UserId: id,}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)

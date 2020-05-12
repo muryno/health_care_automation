@@ -1,6 +1,6 @@
 
 #[s3]
-bucketName : "outdoorkingmedia"
+bucketName : "lifetrusty"
 accessKey: "AKIAI77BFSTSWSWNYTIA"
 accessSecret : "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"
 region: "eu-west-2"
@@ -10,31 +10,31 @@ email_region: "eu-west-2"
 
 ##[db]
 #local host
-#db_name : "lifetrusty"
-#db_pass : "stylemuryne"
-#db_user : "postgres"
-#db_type : "postgres"
-#ssl : "disable"
-#db_host : "localhost"
-#KEY : "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"
-#db_port : "5000"
-#token_password : "!+@5k_4_p@ss-lifetrusty--rXWYPKRz6-crfwoa4y7jzi"
+db_name : "lifetrusty"
+db_pass : "stylemuryne"
+db_user : "postgres"
+db_type : "postgres"
+ssl : "disable"
+db_host : "localhost"
+KEY : "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"
+db_port : "5000"
+token_password : "!+@5k_4_p@ss-lifetrusty--rXWYPKRz6-crfwoa4y7jzi"
 #
 #
 
 #
 ##live
-db_name : "lifetrusty_db"
-
-db_pass : "!lifetrusty-server"
-db_user : "lifetrusty"
-db_type : "postgres"
-ssl : "require"
-db_host : "lifetrusty-db.crfwoa4y7jzi.eu-west-2.rds.amazonaws.com"
-
-KEY : "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"
-db_port : "5000"
-token_password : "!+@5k_4_p@ss-lifetrusty--rXWYPKRz6-7jzi-PUKHF7"
+#db_name : "lifetrusty_db"
+#
+#db_pass : "!lifetrusty-server"
+#db_user : "lifetrusty"
+#db_type : "postgres"
+#ssl : "require"
+#db_host : "lifetrusty-db.crfwoa4y7jzi.eu-west-2.rds.amazonaws.com"
+#
+#KEY : "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"
+#db_port : "5000"
+#token_password : "!+@5k_4_p@ss-lifetrusty--rXWYPKRz6-7jzi-PUKHF7"
 
 
 

@@ -18,7 +18,7 @@ func main(){
 
 	//
 	//configs.GetDB().Debug().AutoMigrate(&model.User{},&model.Logs{},&model.Doctor{},&model.Enquiry{},&model.DoctorAvailability{},&model.Review{},&model.CallHistory{},
-	//	&model.Rate{},&model.CommunityTitle{},&model.CommunityComment{},&model.HealthPost{},&model.HealthPostResponds{},&model.Wallet{},&model.WalletTransaction{},&model.FavoriteDoctor{},
+	//	&model.CommentLikes{},&model.CommunityTitle{},&model.CommunityComment{},&model.HealthPost{},&model.HealthPostResponds{},&model.Wallet{},&model.WalletTransaction{},&model.FavoriteDoctor{},
 	//	&model.Enquiry{})
 	//configs.GetDB().Debug().Model(model.Wallet{}).AddForeignKey("user_id","user(id)","CASCADE","CASCADE")
 	//configs.GetDB().Debug().Model(model.Subscription{}).AddForeignKey("user_id","User(id)","CASCADE","CASCADE")
@@ -68,8 +68,14 @@ func main(){
 	router.POST("/create/patient",controller.CreatePatientAccount)
 	router.PUT("/verify/otp",controller.VerifyPatient)
 
+	//community comment
+	router.POST("/create/community/title",controller.AddCommunityTitleController)
+	router.POST("/community/comment",controller.PostCommentController)
+	router.PUT("/like/comment",controller.UpdateLikesController)
+	router.GET("/get/community/health/title",controller.GetHealthTitlePost)
 
-
+	router.GET("/get/comment/{title_id}",controller.GetCommentController)
+//
 	rout := app.NewMiddleware(router)
 	handler := cors.Default().Handler(rout)
 
