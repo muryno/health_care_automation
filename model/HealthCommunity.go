@@ -171,9 +171,20 @@ func GetComment(title_id int) map[string]interface{} {
 		return u.Message(false, err.Error())
 	}
 
+	ct := &CommentTitle{}
+
+
+	if err := configs.GetDB().Raw(" SELECT id as ID , title as Title ,image as Image , created_at as Created From community_title  where id =?",title_id).Scan(&ct).Error; err != nil{
+		return u.Message(false, err.Error())
+	}
+
+	ct.Comment = *us
+
+
+
 	resp := u.Message(true, "Successful")
 
-	resp["data"]= &us
+	resp["data"]= &ct
 
 	return resp
 }

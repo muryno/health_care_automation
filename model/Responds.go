@@ -45,13 +45,25 @@ type DoctorResponds struct {
 
 }
 
+
+
+
 type Comment struct{
-	ID       uint    `gorm:"primary_key"`
+	ID       uint    `json:"id"`
 	Title   uint    `json:"title_id"`
 	Comment     string    `json:"comment"`
 	CreatedAt string   `json:"created"`
 	Reaction int   `json:"reactions_no"`
 	Like  int  `json:"is_like"`
+}
+
+type CommentTitle struct{
+	ID       uint    `json:"id"`
+	Title     string    `json:"comment_title"`
+	Image     string     `json:"title_image"`
+	Comment     []Comment     `json:"title_comment"`
+	Created string     `json:"date_created"`
+
 }
 
 
