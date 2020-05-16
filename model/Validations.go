@@ -189,7 +189,7 @@ func ValidatePatientAlone (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if  s.Role  != 1{
+	if  s.Roles != 1{
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 
@@ -208,7 +208,7 @@ func ValidateDoctorAlone (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if  s.Role  != 3{
+	if  s.Roles != 3{
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 
@@ -227,7 +227,7 @@ func ValidateAdmin (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if  !(4== s.Role || 5== s.Role )  {
+	if  !(4== s.Roles || 5== s.Roles)  {
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 
@@ -246,7 +246,7 @@ func ValidateSuperAdminAlone (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if  s.Role  != 5{
+	if  s.Roles != 5{
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 
@@ -266,7 +266,7 @@ func ValidateWhoMakeRequest (UserId int) (map[string]interface{}, bool) {
 		return u.Message(false, err.Error()), false
 	}
 
-	if s.Role > 5 || s.Role  <= 0{
+	if s.Roles > 5 || s.Roles <= 0{
 		return u.Message(false, "You are not authorize for this... "), false
 	}
 

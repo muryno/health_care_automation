@@ -51,7 +51,7 @@ func GetUserById() map[string]interface{} {
 	CreateLog(log)
 
 	//check if it is doctor
-	if catr.Role == 3{
+	if catr.Roles == 3{
 		s :=Doctor{}
 		if	err := configs.GetDB().Where("doctor_id=?",userid).Find(&s).Error; err!=nil{
 			return u.Message(false, err.Error())
@@ -75,7 +75,7 @@ func GetDoctor ( s *User , d *Doctor )  map[string]interface{}  {
 
 	docRes:=& DoctorResponds{}
 	docRes.ID = s.ID
-	docRes.Role = s.Role
+	docRes.Role = s.Roles
 	docRes.Phone = s.Phone
 	docRes.Email = s.Email
 	docRes.LastName = s.LastName
@@ -236,7 +236,7 @@ func  LoginAdmin(email,password string) map[string]interface{} {
 
 
 
-	if dt.Role == 1 && dt.Status == 0{
+	if dt.Roles == 1 && dt.Status == 0{
 		otp  := u.GetOtp()
 
 

@@ -26,7 +26,7 @@ func CreatePatientAccount(w http.ResponseWriter, req *http.Request,_ httprouter.
 	user.FirstName  = fname
 	user.LastName = lname
 	user.Phone  = phone
-	user.Role = 1 //patient id
+	user.Roles = 1 //patient id
 
 
 

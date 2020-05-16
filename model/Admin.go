@@ -32,7 +32,7 @@ func (s *User) RegisterAdmin() map[string]interface{} {
 
 	s.Password = string(hashPassWord)
 	s.Status = 1
-	s.Role = 4
+	s.Roles = 4
 
 
 

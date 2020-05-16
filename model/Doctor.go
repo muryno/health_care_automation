@@ -37,7 +37,7 @@ func  RegisterDoctor(s *User, d *Doctor) map[string]interface{} {
 
 	s.Password = string(hashPassWord)
 	s.Status = 1
-	s.Role = 3
+	s.Roles = 3
 
 
 

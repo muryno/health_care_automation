@@ -30,7 +30,7 @@ func (s *User) RegisterSuperAdmin() map[string]interface{} {
 
 	s.Password = string(hashPassWord)
 	s.Status = 1
-	s.Role = 5
+	s.Roles = 5
 
 
 	//Transaction

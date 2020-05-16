@@ -31,20 +31,20 @@ type Enquiry struct {
 }
 type User struct {
 
-	ID            uint    `gorm:"primary_key"`
-	FirstName    string `json:"first_name"`
-	LastName     string `json:"last_name"`
-	Role          uint   `json:"role"`
-	Status        uint   `json:"status"`
-	Email        string `json:"email"`
-	Phone        string `json:"phone"`
-	Password     string `json:"password"`
-	Age    		 string `json:"age"`
-	Gender    		 string `json:"gender"`
-	Nationality    		 string `json:"nationality"`
-	State    		 string `json:"state"`
-	Address  		 string `json:"address"`
-	Image		 string `json:"image"`
+	ID          uint   `gorm:"primary_key"`
+	FirstName   string `json:"first_name"`
+	LastName    string `json:"last_name"`
+	Roles       uint   `json:"role"`
+	Status      uint   `json:"status"`
+	Email       string `json:"email"`
+	Phone       string `json:"phone"`
+	Password    string `json:"password"`
+	Age         string `json:"age"`
+	Gender      string `json:"gender"`
+	Nationality string `json:"nationality"`
+	State       string `json:"state"`
+	Address     string `json:"address"`
+	Image       string `json:"image"`
 	Token        string      `json:"authorization";sql:"-"`
 	Otp          string  `json:"otp"`
 

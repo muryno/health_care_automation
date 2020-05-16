@@ -1,0 +1,51 @@
+//card view iOS
+        card_view.layer.shadowColor = UIColor.gray.cgColor
+        card_view.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+
+        card_view.layer.shadowOpacity = 1.0
+        card_view.layer.masksToBounds = false
+        card_view.layer.cornerRadius = 3.0
+
+
+//pass data via table cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+
+
+        vc.titles = titles[indexPath.row]
+        vc.descriptions = descriptio[indexPath.row]
+        vc.imagse = images[indexPath.row];
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+
+KEY STORE PATH : payme password : payconnectrail  Alias : key0  password : payconnectrail  First name  : connectrail  organization unit : 4 organization : connectrail city: lagos state: lagos country code : 11001
+
+
+Username: nttob8y078br
+Password: zzzxzxzxzwwaxn  info@lifetrusty.com @5k_4_p@55-lifetrusty
+
+enquiry@lifetrusty.com
+@5k_4_p@55-@lifetrusty
+
+
+lifetrusty@lifetrusty.com  @5k_4_p@55-lifetrusty
+
+
+Username: Dabby42
+Password: Daberechukwu42$
+
+path+=('/Users/mac/flutter/bin')
+export PATH
+
+source ~/.zshrc
+
+flutter packages pub run build_runner watch
+
+
+https://web.postman.co/workspaces/b4c2abb6-b345-4394-8683-77a27e95c368/collections
+
+
+

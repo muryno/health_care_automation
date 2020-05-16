@@ -55,7 +55,9 @@ type Comment struct{
 	CreatedAt string   `json:"created"`
 	Reaction int   `json:"reactions_no"`
 	Like  int  `json:"is_like"`
-}
+	Delete int  `json:"can_delete"`
+	Name string  `json:"name"`
+	Image string  `json:"image"`}
 
 type CommentTitle struct{
 	ID       uint    `json:"id"`
