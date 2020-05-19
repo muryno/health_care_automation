@@ -52,11 +52,10 @@ type Comment struct{
 	ID       uint    `json:"id"`
 	Title   uint    `json:"title_id"`
 	Comment     string    `json:"comment"`
-	CreatedAt string   `json:"created"`
+	Createdat string   `json:"created"`
 	Reaction int   `json:"reactions_no"`
-	Like  int  `json:"is_like"`
-	Delete int  `json:"can_delete"`
-	Name string  `json:"name"`
+	Liker  int  `json:"is_like"`
+	Name string  `json:"ful_name"`
 	Image string  `json:"image"`}
 
 type CommentTitle struct{

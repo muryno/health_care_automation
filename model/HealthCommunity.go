@@ -162,19 +162,26 @@ func GetComment(title_id int) map[string]interface{} {
 	us := &[]Comment{}
 
 
-
-	if err := 	configs.GetDB().Debug().Raw("SELECT community_title as Title ,comment as Comment," +
-		"created_at as CreatedAt , id as ID," +
-		"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id) as Reaction," +
-		"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id " +
-		"AND user_id = community_comment.user_id ) as Like  " +
-		" FROM community_comment WHERE community_title =?",title_id).Scan(&us).Error; err != nil {
+	if err := 	configs.GetDB().Debug().Raw("SELECT A.community_title as Title ,A.comment as Comment,A.created_at as Createdat , A.id as ID,"+
+		"(Select COUNT(*) from comment_likes WHERE community_comment_id = A.id) as Reaction,"+
+		"(Select COUNT(*) from comment_likes WHERE community_comment_id = A.id AND user_id = A.user_id ) as Liker,"+
+		"B.roles as Role, CASE WHEN B.roles >1 THEN CONCAT(B.first_name,' ' ,B.last_name) ELSE 'Anonymouse' END "+
+	     "as Name from public.user as B  inner join community_comment as  A on B.id = A.user_id WHERE A.community_title =?",title_id).Scan(&us).Error; err != nil {
 		return u.Message(false, err.Error())
 	}
-	//(Select first_name as FirstName , last_name as LastName ,image as Image, roles," +
-	//		"CASE WHEN role > 1 THEN FirstName + ' '+ LastName" +
-	//		"ELSE 'Anonymous'  END AS Name from user where user.id = community_comment.user_id " +
-	//		")
+
+
+	//if err := 	configs.GetDB().Debug().Raw("SELECT community_title as Title ,comment as Comment," +
+	//	"created_at as CreatedAt , id as ID," +
+	//	"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id) as Reaction," +
+	//	"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id " +
+	//	"AND user_id = community_comment.user_id ) as Like , " +
+	//	"(Select first_name as FirstName , last_name as LastName ,image as Image, roles as role," +
+	//	"CASE WHEN role > 1 THEN FirstName + ' '+ LastName" +
+	//	"ELSE 'Anonymous'  END AS Name from user inner join community_comment on community_comment.user_id = user.id " +
+	//	") FROM community_comment WHERE community_title =?",title_id).Scan(&us).Error; err != nil {
+	//	return u.Message(false, err.Error())
+	//}
 
 	ct := &CommentTitle{}
 
