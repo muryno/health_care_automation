@@ -23,7 +23,7 @@ func init() {
 	ssl := viper.GetString("ssl")
 
 	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s password=%s", dbHost, username, dbName,ssl, password)
-	fmt.Println(dbUri)
+	//fmt.Println(dbUri)
 
 
 	conn, err := gorm.Open("postgres", dbUri)

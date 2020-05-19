@@ -11,7 +11,7 @@ email_region: "eu-west-2"
 ##[db]
 #local host
 db_name : "lifetrusty"
-db_pass : "stylemuryne"
+db_pass : "@+!Harbeola1"
 db_user : "postgres"
 db_type : "postgres"
 ssl : "disable"

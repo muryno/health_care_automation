@@ -167,13 +167,14 @@ func GetComment(title_id int) map[string]interface{} {
 		"created_at as CreatedAt , id as ID," +
 		"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id) as Reaction," +
 		"(Select COUNT(*) from comment_likes WHERE community_comment_id = community_comment.id " +
-		"AND user_id = community_comment.user_id ) as Like , " +
-		"(Select first_name as FirstName , last_name as LastName ,image as Image, roles," +
-		"CASE WHEN role > 1 THEN FirstName + ' '+ LastName" +
-		"ELSE 'Anonymous'  END AS Name from user where user.id = community_comment.user_id " +
-		") FROM community_comment WHERE community_title =?",title_id).Scan(&us).Error; err != nil {
+		"AND user_id = community_comment.user_id ) as Like  " +
+		" FROM community_comment WHERE community_title =?",title_id).Scan(&us).Error; err != nil {
 		return u.Message(false, err.Error())
 	}
+	//(Select first_name as FirstName , last_name as LastName ,image as Image, roles," +
+	//		"CASE WHEN role > 1 THEN FirstName + ' '+ LastName" +
+	//		"ELSE 'Anonymous'  END AS Name from user where user.id = community_comment.user_id " +
+	//		")
 
 	ct := &CommentTitle{}
 
